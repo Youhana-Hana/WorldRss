@@ -1,17 +1,44 @@
 {
 "name": "WorldRss",
 "version": "0.0.1",
+"description": "Displys world news fom rss feeds",
+
 "author": {
-"name": "Youhana Hana",
-"url": "http://github.com/Youhana-Hana/WorldRss"
+ 	    "name": "Youhana Hana",
+ 	    "url": "http://github.com/Youhana-Hana"
   },
-"private": false,
+
+"repository": {
+            "type": "git",
+            "url": "https://github.com/Youhana-Hana/WorldRss.git"
+        },
+
+"bugs": {
+            "url": "https://github.com/Youhana-hana/WorldRss/issues"
+        },
+
 "dependencies": {
-   "express": "3.1.0",
-   "ejs": "0.8.4"
+	   "express": "3.1.0",
+   	   "ejs": "0.8.4"
   },
+
 "devDependencies": {
-    "mocha": "1.10.0",
-    "sinon": "1.7.2"
+    	   "mocha": "1.10.0",
+    	   "sinon": "1.7.2",
+           "jshint" : "2.3.0"
+  },
+
+"scripts": {
+	   "pretest": "./node_modules/jshint/bin/jshint src"
+  },
+
+"jshintConfig": {
+   "boss": true, 
+   "node": true,
+   "strict": true,
+   "unused": true,
+   "undef": true,
+   "maxlen": 100,
+   "indent": 2
   }
 }

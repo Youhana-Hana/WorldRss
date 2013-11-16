@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "run pre commit hook"
+
+set -e
+
+echo "check code quality"
+npm run-script pretest
+
+echo "m3alam"
