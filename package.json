@@ -4,41 +4,44 @@
 "description": "Displys world news fom rss feeds",
 
 "author": {
- 	    "name": "Youhana Hana",
- 	    "url": "http://github.com/Youhana-Hana"
+ 	    	"name": "Youhana Hana",
+ 	    	"url": "http://github.com/Youhana-Hana"
   },
 
 "repository": {
-            "type": "git",
-            "url": "https://github.com/Youhana-Hana/WorldRss.git"
+            	"type": "git",
+            	"url": "https://github.com/Youhana-Hana/WorldRss.git"
         },
 
 "bugs": {
-            "url": "https://github.com/Youhana-hana/WorldRss/issues"
+            	"url": "https://github.com/Youhana-hana/WorldRss/issues"
         },
 
 "dependencies": {
-	   "express": "3.1.0",
-   	   "ejs": "0.8.4"
+		"express": "3.1.0",
+		"ejs": "0.8.4"
   },
 
 "devDependencies": {
-    	   "mocha": "1.10.0",
-    	   "sinon": "1.7.2",
-           "jshint" : "2.3.0"
+		"mocha": "1.10.0",
+		"sinon": "1.7.2",
+		"jshint" : "2.3.0",
+		"istanbul": "0.1.36"
   },
 
 "scripts": {
-	   "pretest": "./node_modules/jshint/bin/jshint src"
+	   	"pretest": "./node_modules/jshint/bin/jshint src",
+	   	"test":  "./node_modules/istanbul/lib/cli.js test ./node_modules/mocha/bin/_mocha --spec ./tests/*.js",
+   		"coverage": "tests/coverage.sh"
   },
 
 "jshintConfig": {
-   "boss": true, 
-   "node": true,
-   "strict": true,
-   "unused": true,
-   "undef": true,
-   "maxlen": 100,
-   "indent": 2
+   		"boss": true, 
+   		"node": true,
+   		"strict": true,
+   		"unused": true,
+   		"undef": true,
+   		"maxlen": 100,
+   		"indent": 2
   }
 }
