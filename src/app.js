@@ -1,5 +1,6 @@
 var express = require('express'),
-    path = require('path');
+    path = require('path'),
+    routes = require('./routes/routes.js');
 
 var app = express();
 
@@ -17,6 +18,8 @@ app.configure= function() {
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
 	app.use(app.router);
+
+	routes.get(app);
 };
 
 module.exports = app;
