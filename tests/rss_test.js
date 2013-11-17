@@ -1,5 +1,6 @@
 var  rss = require('../src/routes/rss.js'),
      sinon = require('sinon'),
+     rsslib = require('../src/lib/rss.js'),
      assert = require('assert');
 
 describe('rss', function() {
@@ -13,7 +14,10 @@ describe('rss', function() {
 
 
 describe('logging', function() {
-  var req = {};  
+  var req = {
+    query: {},  
+  };  
+  
   var res = {};
 
   beforeEach(function(){
@@ -35,23 +39,66 @@ describe('logging', function() {
 });
 
 describe('get', function() {
-  var req = {};
+  var req = {
+    query: {},  
+  };  
   var res = {};
 
   beforeEach(function(){
       res.send = sinon.stub();
+      res.json = sinon.stub();  
+      sinon.stub(rsslib, 'fetch');
       sinon.stub(console, 'log');
+      sinon.stub(console, 'error');
     });
   
   afterEach(function(){
       console.log.restore();
+      console.error.restore();
+      rsslib.fetch.restore();
     });
 
-  it('should return 401', function(){
+  it('should return 500 when urls key not there', function(){
       rss.get(req, res);
 
-      assert(1 === res.send.callCount);
-      assert(res.send.calledWith(401));
+      assert(res.send.calledOnce);
+      assert(res.send.calledWith(500));
     });
+  
+  it('should return rss when urls key exists', function(){
+      req = {
+        query: {
+          src: "url"
+        } 
+      };
+     
+      rsslib.fetch.yields(null, 'json');
+      
+      rss.get(req, res);
+
+      assert(rsslib.fetch.calledOnce);
+      assert(rsslib.fetch.calledWith("url"));
+      assert(res.json.calledOnce);
+      assert(res.json.calledWith('json'));
+    });
+
+  it('should return error when failed to fetch rss', function(){
+    req = {                                      
+      query: {
+        src: "url"
+      } 
+    };
+   
+    rsslib.fetch.yields('error', 'json');
+    
+    rss.get(req, res);
+                                                         
+    assert(rsslib.fetch.calledOnce);
+    assert(rsslib.fetch.calledWith("url"));
+    assert(res.send.calledOnce);
+    assert(res.send.calledWith(500));
+    assert(console.error.calledOnce);
+    assert.equal('error', console.error.args[0]);
+  });
 
 });
