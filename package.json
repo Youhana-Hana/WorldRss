@@ -19,7 +19,10 @@
 
 "dependencies": {
 		"express": "3.1.0",
-		"ejs": "0.8.4"
+		"ejs": "0.8.4",
+                "request": "2.27.0",
+                "async": "0.2.9",
+                "xml2js": "0.2.8"
   },
 
 "devDependencies": {
@@ -31,6 +34,7 @@
   },
 
 "scripts": {
+		"start": "node server.js",
 		"pretest": "./node_modules/jshint/bin/jshint tests; ./node_modules/jshint/bin/jshint src",
 		"test":  "./node_modules/istanbul/lib/cli.js test ./node_modules/mocha/bin/_mocha --spec ./tests/*.js",
 		"coverage": "tests/coverage.sh"
