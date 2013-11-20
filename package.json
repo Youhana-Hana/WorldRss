@@ -22,7 +22,8 @@
 		"ejs": "0.8.4",
                 "request": "2.27.0",
                 "async": "0.2.9",
-                "xml2js": "0.2.8"
+                "xml2js": "0.2.8",
+                "winston": "0.7.2"
   },
 
 "devDependencies": {
