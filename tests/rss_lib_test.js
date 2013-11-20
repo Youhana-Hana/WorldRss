@@ -1,7 +1,8 @@
 var  rss = require('../src/lib/rss.js'),
      sinon = require('sinon'),
      assert = require('assert'),
-     request = require('request');
+     request = require('request'),
+     logger = require('../src/lib/logger.js');
 
 describe('rss module', function() {
   
@@ -17,10 +18,14 @@ describe('rss data', function() {
  
   beforeEach(function(){
     fakeRequest = sinon.stub(request, 'get');
+    sinon.stub(logger, 'error');
+    sinon.stub(logger, 'verbose');
   });
 
   afterEach(function(){
     fakeRequest.restore();
+    logger.verbose.restore();
+    logger.error.restore();
   });
 
   describe('fetch data failed', function() {
@@ -31,6 +36,7 @@ describe('rss data', function() {
       rss.fetch('url', function(err, results) {
         assert.equal('error', err);
         assert.equal(null, results);
+        assert(logger.error.calledWith('error'));
       });      
     });
 
@@ -42,6 +48,7 @@ describe('rss data', function() {
       
         assert.equal('failed to fetch rss from url, response status code 401', err);
         assert.equal(null, results);
+        assert(logger.error.calledWith('failed to fetch rss from url, response status code 401'));
       });      
     });
 
@@ -59,6 +66,7 @@ describe('rss data', function() {
         
         assert.notEqual(null, err);
         assert.equal(null, results);
+        assert(logger.error.atLeast(2));      
       });      
     });
 
@@ -120,68 +128,4 @@ describe('rss data', function() {
   });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
