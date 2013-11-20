@@ -1,11 +1,12 @@
 var express = require('express'),
     path = require('path'),
-    routes = require('./routes/routes.js');
+    routes = require('./routes/routes.js'),
+    logger = require('./lib/logger.js');
 
 var app = express();
 
 app.configure= function() {
-    console.log("app.configure");
+    logger.verbose("app.configure");
 
     app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');

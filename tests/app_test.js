@@ -1,7 +1,8 @@
 var app = require('../src/app.js'),
      sinon = require('sinon'),
      should = require('should'),
-     assert = require('assert');
+     assert = require('assert'),
+     logger = require('../src/lib/logger.js');
 
 describe('app', function() {
   
@@ -15,30 +16,21 @@ describe('app', function() {
 describe('logging', function() {
 
   beforeEach(function(){
-      sinon.stub(console, 'log');
+      sinon.stub(logger, 'verbose');
     });
 
   afterEach(function(){
-      console.log.restore();
+      logger.verbose.restore();
 		});
 
   it('should log configure', function(){
 			app.configure();
-			assert.equal('app.configure', console.log.args[0]);
+			assert.equal('app.configure', logger.verbose.args[0]);
 		});
 
 });
 
 describe('settings', function() {
- 
-  beforeEach(function(){
-      sinon.stub(console, 'log');
-    });
-
-  afterEach(function(){
-      console.log.restore();
-    });
-
   it('should set settings', function(){
 			app.configure();
 			
@@ -53,6 +45,7 @@ describe('routes', function() {
   
   it('when confiure should set routes', function() {
     var routes = app.routes;
+    
     should.notStrictEqual(undefined, routes);
     should.notStrictEqual(undefined, routes.get);
     routes.get[0].path.should.equal('/api/1/rss');
