@@ -1,7 +1,8 @@
 var  rss = require('../src/routes/rss.js'),
      sinon = require('sinon'),
      rsslib = require('../src/lib/rss.js'),
-     assert = require('assert');
+     assert = require('assert'),
+     logger = require('../src/lib/logger.js');
 
 describe('rss', function() {
   
@@ -22,18 +23,18 @@ describe('logging', function() {
 
   beforeEach(function(){
       res.send = sinon.stub();
-      sinon.stub(console, 'log');
+      sinon.stub(logger, 'verbose');
     });
 
   afterEach(function(){
-      console.log.restore();
+      logger.verbose.restore();
     });
 
   it('should log', function(){
       rss.get(req, res);
       
-      assert(console.log.calledOnce);
-      assert.equal('rss.get', console.log.args[0]);
+      assert(logger.verbose.calledOnce);
+      assert.equal('rss.get', logger.verbose.args[0]);
     });
 
 });
@@ -48,13 +49,11 @@ describe('get', function() {
       res.send = sinon.stub();
       res.json = sinon.stub();  
       sinon.stub(rsslib, 'fetch');
-      sinon.stub(console, 'log');
-      sinon.stub(console, 'error');
+      sinon.stub(logger, 'error');
     });
   
   afterEach(function(){
-      console.log.restore();
-      console.error.restore();
+      logger.error.restore();
       rsslib.fetch.restore();
     });
 
@@ -63,6 +62,8 @@ describe('get', function() {
 
       assert(res.send.calledOnce);
       assert(res.send.calledWith(500));
+      assert(logger.error.calledOnce);
+      assert.equal('missing query string', logger.error.args[0]);
     });
   
   it('should return rss when urls key exists', function(){
@@ -97,8 +98,8 @@ describe('get', function() {
     assert(rsslib.fetch.calledWith("url"));
     assert(res.send.calledOnce);
     assert(res.send.calledWith(500));
-    assert(console.error.calledOnce);
-    assert.equal('error', console.error.args[0]);
+    assert(logger.error.calledOnce);
+    assert.equal('error', logger.error.args[0]);
   });
 
 });
