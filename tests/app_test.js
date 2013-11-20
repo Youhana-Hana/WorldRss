@@ -24,9 +24,9 @@ describe('logging', function() {
 		});
 
   it('should log configure', function(){
-     app.configure();
-     assert.equal('app.configure', logger.verbose.args[0]);
-   });
+    app.configure();
+    assert.equal('app.configure', logger.verbose.args[0]);
+  });
 
 });
 
