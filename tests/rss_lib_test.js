@@ -50,6 +50,19 @@ describe('rss data', function() {
 
   describe('fetch data OK', function() {
 
+    it('should fail if not valid xml', function(){
+      var content = "<rss><channel><item><title>1</title></item>"; 
+
+      fakeRequest.yields(null, { statusCode: 200 }, content);
+
+      rss.fetch('url', function(err, results) {
+        
+        assert.notEqual(null, err);
+        assert.equal(null, results);
+      });      
+    });
+
+
     it('should return rss as object', function(){
       var content = "<rss><channel><item><title>1</title></item>" + 
                    "<item><title>2</title></item></channel></rss>";
@@ -62,7 +75,6 @@ describe('rss data', function() {
         assert.equal(2, results[0].rss.channel[0].item.length);
       });      
     });
-
 
     it('should return maximum 10 items', function(){
       var content = "<rss><channel><item><title>1</title></item>" + 
