@@ -1,7 +1,8 @@
 var  routes = require('../src/routes/routes.js'),
      rss = require('../src/routes/rss.js'),
      sinon = require('sinon'),
-     assert = require('assert');
+     assert = require('assert'),
+     logger = require('../src/lib/logger.js');
 
 describe('routes', function() {
   
@@ -18,18 +19,18 @@ describe('logging', function() {
 
   beforeEach(function(){
       app.get = sinon.stub();
-      sinon.stub(console, 'log');
+      sinon.stub(logger, 'verbose');
     });
 
   afterEach(function(){
-      console.log.restore();
+      logger.verbose.restore();
     });
 
   it('should log', function(){
       routes.get(app);
       
-      assert(console.log.calledOnce);
-      assert.equal('routes.get', console.log.args[0]);
+      assert(logger.verbose.calledOnce);
+      assert.equal('routes.get', logger.verbose.args[0]);
     });
 
 });
@@ -39,13 +40,8 @@ describe('get', function() {
 
   beforeEach(function(){
       app.get = sinon.stub();
-      sinon.stub(console, 'log');
     });
   
-  afterEach(function(){
-      console.log.restore();
-    });
-
   it('should setup get', function(){
       routes.get(app);
 
