@@ -84,6 +84,27 @@ describe('rss data', function() {
       });      
     });
 
+    it('should group results for more than one source', function(){
+      var content = "<rss><channel><item><title>1</title></item>" + 
+                   "<item><title>2</title></item><item><title>3</title></item>"+
+                   "<item><title>2</title></item><item><title>3</title></item>"+
+                   "<item><title>2</title></item><item><title>3</title></item>"+
+                   "<item><title>2</title></item><item><title>3</title></item>"+
+                   "<item><title>2</title></item><item><title>3</title></item>"+
+                   "<item><title>2</title></item><item><title>3</title></item>"+
+                   "<item><title>2</title></item><item><title>3</title></item>"+
+                   "</channel></rss>";
+
+      fakeRequest.yields(null, { statusCode: 200 }, content);
+
+      rss.fetch('url;url2', function(err, results) {
+        
+        assert.equal(null, err);
+        assert.equal(10, results[0].rss.channel[0].item.length);
+        assert.equal(10, results[1].rss.channel[0].item.length);
+      });      
+    });
+
   });
 
 });
