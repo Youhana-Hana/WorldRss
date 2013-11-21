@@ -43,12 +43,21 @@ describe('settings', function() {
 
 describe('routes', function() {
   
-  it('when confiure should set routes', function() {
+  it('when confiure should set routes get', function() {
     var routes = app.routes;
     
     should.notStrictEqual(undefined, routes);
     should.notStrictEqual(undefined, routes.get);
     routes.get[0].path.should.equal('/api/1/rss');
+  });
+
+  it('should set views', function() {
+    var routes = app.routes;
+    
+    should.notStrictEqual(undefined, routes);
+    should.notStrictEqual(undefined, routes.get);
+    routes.get[1].path.should.equal('/');
+    should.notStrictEqual(undefined, routes.get[1].callbacks);
   });
 
 });

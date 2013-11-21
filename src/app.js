@@ -21,6 +21,7 @@ app.configure= function() {
     app.use(app.router);
 
     routes.get(app);
+    routes.views(app);
   };
 
 module.exports = app;
