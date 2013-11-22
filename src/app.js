@@ -13,7 +13,7 @@ app.configure= function() {
     app.set('view engine', 'ejs');
 
     app.use(express.compress());
-    app.use(express.static(path.join(__dirname, 'pubic')));
+    app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.favicon(path.join(__dirname, 'public/img/favicon.ico')));
     app.use(express.cookieParser());
     app.use(express.bodyParser());

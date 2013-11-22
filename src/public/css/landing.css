@@ -1,0 +1,48 @@
+
+html, body { 
+  height: 100% 
+}
+
+body {
+        margin:0;
+        padding:0;
+  background-color: #ffffff;
+}
+
+#header {
+        background-color: #ffc425;
+  font-family: 'verdana';
+  color: #020a2c;
+  text-align: right;
+  padding: 20px;
+}
+
+#rss {
+         font-family: 'verdana';
+}
+
+section {
+        height: 20%;
+}
+
+section > h1 {
+        text-align: right;
+        font-size: 5em;
+        font-weight: normal;
+        padding:0;
+        margin:0;
+}
+
+section > h2 {
+        text-align: right;
+        font-size: 3em;
+        font-weight: normal;
+        padding:0;
+        margin:0;
+}
+
+a {
+        color: white;
+}
+
+}
