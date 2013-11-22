@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
   <head>
     <link href="/css/landing.css" rel="stylesheet">
-    <script src="/js/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>    
+    <script src="/js/RssCtrl.js"></script>    
     <title>Rss feeds</title>
    </head>
 
@@ -12,5 +13,19 @@
       <h2>Rss from BBC and Sky</h2>
     </section>
   
-   </body>
+    <div ng-controller="RssCtrl"> 
+      
+      <section ng-repeat="source in sources">
+        <h1>{{source.rss.channel[0].title}}</h1>
+        <img src="{{source.rss.channel[0].image[0].url}}"/>
+        
+        <article ng-repeat="article in source.rss.channel[0].item">
+          <h1>{{article.title}}</h1>
+          <p>{{article.description}}</p>
+        </article>  
+     
+      </section>
+    </div>
+
+  </body>
 </html>
