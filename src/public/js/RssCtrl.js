@@ -1,6 +1,17 @@
-function RssCtrl($scope) {
-  $scope.sources = [
-    { rss: { channel: [ { title: "BBC", link: "http://www.bbc.co.uk/news/#sa-ns_mchannel=rss&ns_source=PublicRSS20-sa", image: [ { url:"http://news.bbcimg.co.uk/nol/shared/img/bbc_news_120x60.gif" } ], item: [ { title: "BBC title 1", description: "BBC description 1.", link: "link1" }, { title: "BBC title2", description: "BBC description2", link: "link2" } ] } ] } } ,
-    { rss: { channel: [ { title: "sky", link: "http://www.bbc.co.uk/news/#sa-ns_mchannel=rss&ns_source=PublicRSS20-sa", image: [ { url:"http://news.bbcimg.co.uk/nol/shared/img/bbc_news_120x60.gif" } ], item: [ { title: "sky title 1", description:  " sky description 1" }, { title: "sky title2", description: "sky description2" } ] } ] } } ,
-  ];
+/*jshint unused:false */
+function RssCtrl($scope, $http, $templateCache) {
+
+  $scope.fetch = function(sources) {
+    $http({ method: 'get', url: 'http://localhost:3000/api/1/rss?src=' + sources,
+            cache: $templateCache }).
+      success(function(data, status) {
+        $scope.sources = data;
+        $scope.status = status;
+      }).
+      error(function(data, status) {
+        $scope.sources = [];
+        $scope.failure = data || "Request failed";
+        $scope.status = status;
+      });
+  };
 }

@@ -13,13 +13,13 @@
       <h2>Rss from BBC and Sky</h2>
     </section>
   
-    <div ng-controller="RssCtrl"> 
-      
+    <div ng-controller="RssCtrl" ng-init="fetch('http://feeds.bbci.co.uk/news/rss.xml')"> 
       <section class="channel" ng-repeat="source in sources">
-       <img src="{{source.rss.channel[0].image[0].url}}"/>
+       <img src="{{source.rss.channel[0].image[0].url}}" alt="{{source.rss.channel[0].image[0].title}}"/>
+       <h3>{{source.rss.channel[0].title}}</h3>
         
         <article ng-repeat="article in source.rss.channel[0].item">
-          <h4><a href="xxxxx">{{article.title}}</a></h4>
+          <h4><a href='{{ article.link }}'>{{article.title}}</a></h4>
           <p>{{article.description}}</p>
         </article>  
      
