@@ -1,8 +1,8 @@
 var request = require('request'),
     util = require('util'),
     async = require('async'),
-    parseString = require('xml2js').parseString,
-    logger = require('./logger.js');
+    logger = require('./logger.js'),
+    xml2json = require("xml2json");
 
 var rss = {};
 
@@ -50,7 +50,6 @@ _getRss = function(url, callback) {
       }
     
       if (err) {
-        logger.error('error get rss from %s, error %s', url, err);
         return callback(err, null);
       }
     
@@ -61,8 +60,6 @@ _getRss = function(url, callback) {
          url,
          response.statusCode);
        
-        logger.error(failMessage);
-
         return callback(failMessage, null);
       }
     });
@@ -71,19 +68,29 @@ _getRss = function(url, callback) {
 _getContentAsJson = function(body, callback) {
     logger.verbose('rss.getContentAsJson');
 
-    return parseString(body, callback);
+    var options = {
+      sanitize: false 
+    };
+
+    return callback(null, xml2json.toJson(body, options));
   };
 
-_getTopItems = function(rss, count, callback) {
+_getTopItems = function(content, count, callback) {
     logger.verbose('rss.getTopItems');
 
-    var itemsCount = rss.rss.channel[0].item.length;
+    var rss = JSON.parse(content).rss;
+    if(!rss)
+    {
+      return callback('invalid rss.', null);
+    }
+
+    var itemsCount = rss.channel.item.length;
    
     if (itemsCount > 10) {
-      rss.rss.channel[0].item.splice(10, itemsCount -10);
+      rss.channel.item.splice(10, itemsCount -10);
     }
  
-    return callback(null, rss);
+    return callback(null, JSON.stringify(rss));
   };
 
 module.exports = rss;

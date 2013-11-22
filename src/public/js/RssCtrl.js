@@ -5,11 +5,11 @@ function RssCtrl($scope, $http, $templateCache) {
     $http({ method: 'get', url: 'http://localhost:3000/api/1/rss?src=' + sources,
             cache: $templateCache }).
       success(function(data, status) {
-        $scope.sources = data;
+        $scope.rss = JSON.parse(data);
         $scope.status = status;
       }).
       error(function(data, status) {
-        $scope.sources = [];
+        $scope.rss = [];
         $scope.failure = data || "Request failed";
         $scope.status = status;
       });

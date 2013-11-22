@@ -58,15 +58,14 @@ describe('rss data', function() {
   describe('fetch data OK', function() {
 
     it('should fail if not valid xml', function(){
-      var content = "<rss><channel><item><title>1</title></item>"; 
+      var content = "nothing"; 
 
       fakeRequest.yields(null, { statusCode: 200 }, content);
 
       rss.fetch('url', function(err, results) {
         
-        assert.notEqual(null, err);
+        assert.equal('invalid rss.', err);
         assert.equal(null, results);
-        assert(logger.error.atLeast(2));      
       });      
     });
 
@@ -80,9 +79,11 @@ describe('rss data', function() {
       rss.fetch('url', function(err, results) {
         
         assert.equal(null, err);
-        assert.equal(2, results[0].rss.channel[0].item.length);
+        var channels = JSON.parse(results);
+        assert.equal(2, channels.channel.item.length);
       });      
     });
+
 
     it('should return maximum 10 items', function(){
       var content = "<rss><channel><item><title>1</title></item>" + 
@@ -100,9 +101,11 @@ describe('rss data', function() {
       rss.fetch('url', function(err, results) {
         
         assert.equal(null, err);
-        assert.equal(10, results[0].rss.channel[0].item.length);
+        var channels = JSON.parse(results);
+        assert.equal(10, channels.channel.item.length);
       });      
     });
+
 
     it('should group results for more than one source', function(){
       var content = "<rss><channel><item><title>1</title></item>" + 
@@ -118,10 +121,12 @@ describe('rss data', function() {
       fakeRequest.yields(null, { statusCode: 200 }, content);
 
       rss.fetch('url;url2', function(err, results) {
-        
+       
         assert.equal(null, err);
-        assert.equal(10, results[0].rss.channel[0].item.length);
-        assert.equal(10, results[1].rss.channel[0].item.length);
+        var channel1 = JSON.parse(results[0]);
+        var channel2 = JSON.parse(results[0]);
+        assert.equal(10, channel1.channel.item.length);
+        assert.equal(10, channel2.channel.item.length);
       });      
     });
 
