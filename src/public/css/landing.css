@@ -15,6 +15,7 @@ body {
   color: #020a2c;
   text-align: right;
   padding: 20px;
+  margin-bottom: 5px;
 }
 
 #rss {
@@ -41,8 +42,43 @@ section > h2 {
         margin:0;
 }
 
-a {
-        color: white;
+.channel {
+        font-family: 'verdana';
 }
 
+.channel h3 {
+        text-align: left;
+        font-size: 3em;
+        font-weight: normal;
+        padding:3px;
+        margin:0;
+}
+
+.channel img {
+        border:1;
+        padding:3;
+}
+
+.channel h4 {
+        text-align: left;
+        font-size: 1em;
+        font-weight: bold;
+        padding:1px;
+        margin:0px;
+}
+
+.channel p {
+        text-align:left;
+        padding: 0;
+        margin:0px;
+}
+
+.channel article {
+        padding: 5px;
+}
+
+
+a {
+        color: #000f63;
+        text-decoration: none;
 }

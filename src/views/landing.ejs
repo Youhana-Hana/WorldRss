@@ -15,12 +15,11 @@
   
     <div ng-controller="RssCtrl"> 
       
-      <section ng-repeat="source in sources">
-        <h1>{{source.rss.channel[0].title}}</h1>
-        <img src="{{source.rss.channel[0].image[0].url}}"/>
+      <section class="channel" ng-repeat="source in sources">
+       <img src="{{source.rss.channel[0].image[0].url}}"/>
         
         <article ng-repeat="article in source.rss.channel[0].item">
-          <h1>{{article.title}}</h1>
+          <h4><a href="xxxxx">{{article.title}}</a></h4>
           <p>{{article.description}}</p>
         </article>  
      
