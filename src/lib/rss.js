@@ -90,7 +90,7 @@ _getTopItems = function(content, count, callback) {
       rss.channel.item.splice(10, itemsCount -10);
     }
  
-    return callback(null, JSON.stringify(rss));
+    return callback(null, rss);
   };
 
 module.exports = rss;
