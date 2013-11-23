@@ -1,12 +1,12 @@
-var  landing = require('../src/routes/landing.js'),
+var  landing = require('../../src/routes/landing.js'),
      sinon = require('sinon'),
      assert = require('assert'),
-     logger = require('../src/lib/logger.js');
+     logger = require('../../src/lib/logger.js');
 
 describe('landing', function() {
   
   it('when requiring should be correct', function() {
-    var name = require.resolve('../src/routes/landing');
+    var name = require.resolve('../../src/routes/landing');
     delete require.cache[name];
   });
 

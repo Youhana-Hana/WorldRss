@@ -1,13 +1,13 @@
-var  rss = require('../src/lib/rss.js'),
+var  rss = require('../../src/lib/rss.js'),
      sinon = require('sinon'),
      assert = require('assert'),
      request = require('request'),
-     logger = require('../src/lib/logger.js');
+     logger = require('../../src/lib/logger.js');
 
 describe('rss module', function() {
   
   it('when requiring should be correct', function() {
-    var name = require.resolve('../src/lib/rss');
+    var name = require.resolve('../../src/lib/rss');
     delete require.cache[name];
   });
 

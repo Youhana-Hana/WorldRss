@@ -37,7 +37,7 @@
 "scripts": {
 		"start": "node src/server.js",
 		"pretest": "./node_modules/jshint/bin/jshint tests; ./node_modules/jshint/bin/jshint src",
-		"test":  "./node_modules/istanbul/lib/cli.js test ./node_modules/mocha/bin/_mocha --spec ./tests/*.js",
+		"test":  "./node_modules/istanbul/lib/cli.js test ./node_modules/mocha/bin/_mocha --spec ./tests/**/*.js",
 		"coverage": "tests/coverage.sh"
   },
 

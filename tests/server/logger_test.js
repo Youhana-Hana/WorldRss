@@ -1,4 +1,4 @@
-var logger = require('../src/lib/logger.js'),
+var logger = require('../../src/lib/logger.js'),
     assert = require('assert');
 
 describe('logger', function() {

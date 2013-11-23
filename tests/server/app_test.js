@@ -1,13 +1,13 @@
-var app = require('../src/app.js'),
+var app = require('../../src/app.js'),
      sinon = require('sinon'),
      should = require('should'),
      assert = require('assert'),
-     logger = require('../src/lib/logger.js');
+     logger = require('../../src/lib/logger.js');
 
 describe('app', function() {
   
   it('when requiring should be correct', function() {
-    var name = require.resolve('../src/app');
+    var name = require.resolve('../../src/app');
     delete require.cache[name];
   });
 
@@ -35,7 +35,7 @@ describe('settings', function() {
   it('should set settings', function(){
     app.configure();
     assert.equal('ejs', app.get('view engine'));
-    assert.equal('/home/Youhana/src/WorldRss/src/views', app.get('views'));
+    assert.notEqual(-1, app.get('views').indexOf('WorldRss/src/views'));
     assert.equal('3000', app.get('port'));
   });
 

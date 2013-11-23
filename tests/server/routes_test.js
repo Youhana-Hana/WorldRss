@@ -1,14 +1,14 @@
-var  routes = require('../src/routes/routes.js'),
-     rss = require('../src/routes/rss.js'),
+var  routes = require('../../src/routes/routes.js'),
+     rss = require('../../src/routes/rss.js'),
      sinon = require('sinon'),
      assert = require('assert'),
-     logger = require('../src/lib/logger.js'),
-     landing = require('../src/routes/landing.js');
+     logger = require('../../src/lib/logger.js'),
+     landing = require('../../src/routes/landing.js');
 
 describe('routes', function() {
   
   it('when requiring should be correct', function() {
-    var name = require.resolve('../src/routes/routes');
+    var name = require.resolve('../../src/routes/routes');
     delete require.cache[name];
   });
 
